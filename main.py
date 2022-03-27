@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3cd5876... init commit
 from fastapi import FastAPI
 from models import Base
 from database import engine
 from routing import item, user
+<<<<<<< HEAD
 =======
 from typing import Optional, List
 from pydantic import BaseModel
@@ -14,11 +18,14 @@ from database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from schemas import UserCreate, User
 >>>>>>> 9204f15... init commit
+=======
+>>>>>>> 3cd5876... init commit
 
 app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 app.include_router(user.router)
 app.include_router(item.router)
@@ -57,3 +64,7 @@ def retrieve_user(user_id: int, db: Session = Depends(get_db)):
 def delete_user(user_id: int, db: Session = Depends(get_db)):
     return crud.delete_user(user_id, db)
 >>>>>>> 9204f15... init commit
+=======
+app.include_router(user.router)
+app.include_router(item.router)
+>>>>>>> 3cd5876... init commit
