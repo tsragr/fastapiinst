@@ -3,6 +3,7 @@ import datetime
 from pydantic import BaseModel
 
 
+<<<<<<< HEAD
 class UserBase(BaseModel):
     email: str
 
@@ -17,6 +18,13 @@ class ItemBase(BaseModel):
 
 class ItemUpdate(ItemBase):
     pass
+=======
+class ItemBase(BaseModel):
+    title: str
+    description: Optional[str] = None
+    time_created: datetime.datetime
+    time_updated: datetime.datetime = None
+>>>>>>> 9204f15... init commit
 
 
 class ItemCreate(ItemBase):
@@ -25,20 +33,34 @@ class ItemCreate(ItemBase):
 
 class Item(ItemBase):
     id: int
+<<<<<<< HEAD
     owner: UserBase
     time_created: datetime.datetime
     time_updated: datetime.datetime = None
+=======
+    owner_id: int
+>>>>>>> 9204f15... init commit
 
     class Config:
         orm_mode = True
 
 
+<<<<<<< HEAD
 class UserCreate(UserBase):
     password: str
 
 
 class UserUpdate(UserBase):
     pass
+=======
+class UserBase(BaseModel):
+    email: str
+
+
+class UserCreate(BaseModel):
+    email: str
+    password: str
+>>>>>>> 9204f15... init commit
 
 
 class User(UserBase):
