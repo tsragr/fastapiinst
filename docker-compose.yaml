@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  postgres_db:
+    container_name: fastapi_postgres
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5436:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    env_file:
+      - .env
+
+
+  web_app:
+    container_name: fastapi_crud
+    build: .
+    command: bash /usr/src/FastApiCRUD/run.sh
+    volumes:
+      - .:/usr/src/FastApiCRUD
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres_db
+    restart: always
+    env_file:
+      - .env
+volumes:
+  postgres_data:
