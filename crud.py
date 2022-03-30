@@ -41,6 +41,7 @@ def get_items(db: Session):
     return db.query(models.Item).all()
 
 
+
 def create_item(db: Session, request: schemas.ItemCreate, owner_id: int):
     item = models.Item(**request.dict(), owner_id=owner_id)
     db.add(item)
