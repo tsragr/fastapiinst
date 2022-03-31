@@ -19,23 +19,11 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 3cd5876... init commit
+
 
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
-<<<<<<< HEAD
         db.close()
-=======
->>>>>>> 9204f15... init commit
-=======
-        db.close()
->>>>>>> 3cd5876... init commit
-=======
->>>>>>> origin/master

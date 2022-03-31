@@ -1,10 +1,10 @@
 from typing import List
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 import crud
 import database
 import schemas
-import models
+
 
 router = APIRouter(
     prefix="/item",
