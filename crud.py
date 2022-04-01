@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-
+from hashing import Hash
 import models, schemas
 
 
@@ -13,8 +13,8 @@ def get_users(db: Session):
 
 
 def create_user(db: Session, request: schemas.UserCreate):
-    fake_hashed_password = '123qweewq312'
-    user = models.User(**request.dict(), hashed_password=fake_hashed_password)
+    hashed_password = Hash.bcrypt(request.password)
+    user = models.User(email=request.email, hashed_password=hashed_password)
     db.add(user)
     db.commit()
     db.refresh(user)
@@ -52,6 +52,11 @@ def create_item(db: Session, request: schemas.ItemCreate, owner_id: int):
 def update_item(db: Session, request: schemas.Item, item):
     item.update(request.dict())
     db.commit()
+
+
+def get_my_items(db: Session, user_id: int):
+    print(user_id)
+    return db.query(models.Item).filter(models.Item.owner_id == user_id).all()
 
 
 def delete_item(item, db: Session):

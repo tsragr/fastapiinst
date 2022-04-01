@@ -1,6 +1,7 @@
 from typing import List, Optional
 import datetime
 from pydantic import BaseModel
+from fastapi.param_functions import Form, File
 
 
 class UserBase(BaseModel):
@@ -19,6 +20,10 @@ class ItemUpdate(ItemBase):
     pass
 
 
+class ItemCreate(ItemBase):
+    pass
+
+
 class ItemBase(BaseModel):
     title: str
     description: Optional[str] = None
@@ -26,14 +31,17 @@ class ItemBase(BaseModel):
     time_updated: datetime.datetime = None
 
 
-class ItemCreate(ItemBase):
-    pass
+class MyItem(ItemBase):
+    id: int
+
+    class Config:
+        orm_mode = True
 
 
 class Item(ItemBase):
     id: int
 
-    owner_id: int
+    owner: UserBase
 
     class Config:
         orm_mode = True
@@ -48,8 +56,8 @@ class UserBase(BaseModel):
 
 
 class UserCreate(BaseModel):
-    email: str
-    password: str
+    email: str = Form(...)
+    password: str = Form(...)
 
 
 class User(UserBase):
@@ -61,3 +69,8 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
