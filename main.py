@@ -6,7 +6,7 @@ from database import engine
 
 app = FastAPI()
 
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
 app.include_router(authenticate.router)
 app.include_router(user.router)
